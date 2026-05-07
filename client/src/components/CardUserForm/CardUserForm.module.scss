@@ -1,0 +1,77 @@
+.cardWrapper {
+   display: flex;
+   justify-content: center;
+   flex-wrap: wrap;
+   gap: 20px;
+}
+
+.userArticle {
+    // border: 2px solid red;
+    box-shadow: 0 1px 25px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    width: 280px;
+}
+
+.cardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(to bottom right, #3b82f6, #a855f7, #ec4899);
+    border-radius: 11px 11px 0 0;
+    position: relative;
+    height: 130px;
+}
+
+.cardBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background-color: azure;
+    border-radius: 11px 11px;
+}
+
+.fullName {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px;
+}
+
+.ageUser {
+    padding: 10px;
+    font-size: 16px;
+}
+
+.numberUser {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+.userImg {
+    object-fit: cover;
+    width: 100px;
+}
+
+.iconsHeartButton {
+    color: red;
+    cursor: pointer;
+    font-size: 24px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 10px;
+    background: none;
+    border: none;
+}
+
+.iconsHeart {
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.iconsHeart:hover {
+    background-color: #3b82f6;
+}

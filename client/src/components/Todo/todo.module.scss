@@ -1,0 +1,182 @@
+$color-primary: #84cc16;
+$color-secondary: #22c55e;
+$color-accent: #92db25;
+$color-warning: #facc15;
+$color-danger: #ef4444;
+$color-border: #d9f99d;
+$color-bg: #f5fde6;
+$color-bg-button: #fef9c3;
+$color-muted: #a3a3a3;
+$color-text-disabled: #7a7a7a;
+
+$font-base: 16px;
+$font-family: sans-serif;
+
+$padding-section: 28px;
+$padding-element: 15px;
+$radius: 10px;
+$radius-lg: 16px;
+
+.home {
+    border: 2px solid $color-border;
+    border-radius: $radius-lg;
+    overflow: hidden;
+}
+
+.todoHeader {
+    display: flex;
+    flex-direction: column;
+    border-radius: $radius-lg $radius-lg 0 0;
+    min-width: 630px;
+    background: linear-gradient(to right, $color-primary, $color-secondary, $color-warning);
+    padding: $padding-section;
+}
+
+.title {
+    color: white;
+    font-family: $font-family;
+    font-size: 34px;
+    font-weight: 500;
+    padding: 10px 10px 10px 0;
+}
+
+.progress {
+    color: white;
+    font-family: $font-family;
+    font-size: $font-base;
+}
+
+.addTask {
+    display: flex;
+    gap: 10px;
+    background-color: $color-bg;
+    padding: $padding-section;
+    border-bottom: 2px solid $color-border;
+}
+
+.inputAdd {
+    outline: none;
+    border: 2px solid $color-accent;
+    background-color: $color-bg;
+    padding: $padding-element;
+    border-radius: $radius;
+    width: 80%;
+    font-size: $font-base;
+}
+
+.buttonAdd {
+    border-radius: $radius;
+    padding: $padding-element;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(to right, $color-primary, $color-secondary);
+    color: white;
+    width: 18%;
+    font-size: $font-base;
+}
+
+.taskList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    padding: $padding-section;
+}
+
+.taskLabel {
+    display: flex;
+    align-items: center;
+    font-family: $font-family;
+    gap: 8px;
+    user-select: none;
+    cursor: pointer;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid $color-border;
+    background-color: $color-bg;
+    border-radius: $radius;
+    padding: $padding-element;
+    gap: 10px;
+}
+
+.checkBoxTask {
+    cursor: pointer;
+    accent-color: $color-accent;
+}
+
+.deleteTask {
+    border: none;
+    color: $color-danger;
+    background-color: $color-bg-button;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+
+    &:hover {
+        background-color: #fee2e2;
+    }
+}
+
+.updateTask {
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    border-radius: 8px;
+    background-color: $color-bg-button;
+    color: $color-secondary;
+
+    &:hover {
+        background-color: $color-border;
+    }
+}
+
+.editInput {
+    flex: 1;
+    outline: none;
+    border: 2px solid $color-accent;
+    background-color: white;
+    padding: 8px 12px;
+    border-radius: $radius;
+    font-size: $font-base;
+    font-family: $font-family;
+}
+
+.buttonTask {
+    display: flex;
+    gap: 10px;
+}
+
+.noTodo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 75px;
+}
+
+.noTodoTitle {
+    font-size: 24px;
+    color: $color-muted;
+}
+
+.noTodoText {
+    color: $color-muted;
+}
+
+.taskDisable {
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6px);
+    opacity: 0.7;
+    transition: all 0.3s ease;
+
+    p {
+        text-decoration: line-through;
+        color: $color-text-disabled;
+    }
+}
