@@ -66,7 +66,6 @@ const userSlice = createSlice({
   reducers: {
     updateUser: (state, { payload }) => {
       const user = state.users.find(u => u.id === payload);
-      console.log('payload :>> ', payload);
       if (user) {
         user.isFavourite = !user.isFavourite;
       }

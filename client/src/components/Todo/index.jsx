@@ -1,13 +1,13 @@
-import { useState } from 'react';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
+import { useEffect, useState } from 'react';
+import { Formik, Field, Form } from 'formik';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { connect } from 'react-redux';
 import { FaPen, FaCheck, FaTimes } from 'react-icons/fa';
 import {
-  deleteTodo,
-  completeTodo,
-  createTodo,
-  updateTodo,
+  getTodoThunk,
+  createTodoThunk,
+  deleteTodoThunk,
+  updatedTodoThunk,
 } from '../../store/slices/todoSlice';
 import { TODO_VALIDATION_SCHEMA } from '../../utils/validatiosnShemas';
 import classNames from 'classnames';
@@ -15,23 +15,25 @@ import styles from './todo.module.scss';
 
 function Todo ({
   todoTask,
-  deleteTodoById,
-  completeTodoTask,
-  createTodoTask,
   updateTodoTask,
+  createTodo,
+  getTodo,
+  deleteTodo,
 }) {
   const [editingId, setEditingId] = useState(null);
   const [editText, setEditText] = useState('');
-
+  useEffect(() => {
+    getTodo();
+  }, [getTodo]);
   const initialValues = {
     todo: '',
   };
   const submitHandler = (values, { resetForm }) => {
-    createTodoTask(values);
+    createTodo(values);
     resetForm();
   };
   const changeCompleted = (id, checked) => {
-    completeTodoTask(id, { isCompleted: checked });
+    updateTodoTask(id, { status: checked });
   };
   const startEditing = (id, task) => {
     setEditingId(id);
@@ -44,7 +46,7 @@ function Todo ({
   const saveEditing = id => {
     const trimmed = editText.trim();
     if (trimmed) {
-      updateTodoTask(id, trimmed);
+      updateTodoTask(id, { body: trimmed });
     }
     setEditingId(null);
     setEditText('');
@@ -53,7 +55,7 @@ function Todo ({
     classNames(styles.task, { [styles.taskDisable]: isCompleted });
 
   const completeadtaskNumner = () =>
-    todoTask.todo.filter(t => t.isCompleted).length;
+    todoTask.todo.filter(t => t.status).length;
   const taskNumber = () => todoTask.todo.length;
 
   return (
@@ -90,7 +92,7 @@ function Todo ({
           </div>
         ) : (
           todoTask.todo.map(t => (
-            <div key={t.id} className={taskClass(t.isCompleted)}>
+            <div key={t.id} className={taskClass(t.status)}>
               {editingId === t.id ? (
                 <>
                   <input
@@ -124,25 +126,25 @@ function Todo ({
                   <label className={styles.taskLabel}>
                     <input
                       type='checkbox'
-                      checked={t.isCompleted}
+                      checked={t.status}
                       onChange={({ target: { checked } }) =>
                         changeCompleted(t.id, checked)
                       }
                       className={styles.checkBoxTask}
                     />
-                    <p>{t.task}</p>
+                    <p>{t.body}</p>
                   </label>
                   <div className={styles.buttonTask}>
                     <button
                       className={styles.updateTask}
-                      onClick={() => startEditing(t.id, t.task)}
-                      disabled={t.isCompleted}
+                      onClick={() => startEditing(t.id, t.body)}
+                      disabled={t.status}
                     >
                       <FaPen />
                     </button>
                     <button
                       className={styles.deleteTask}
-                      onClick={() => deleteTodoById(t.id)}
+                      onClick={() => deleteTodo(t.id)}
                     >
                       <FaRegTrashAlt />
                     </button>
@@ -159,10 +161,11 @@ function Todo ({
 
 const mapStateToProps = ({ todoTask }) => ({ todoTask });
 const mapDispatchToProps = dispatch => ({
-  deleteTodoById: id => dispatch(deleteTodo(id)),
-  completeTodoTask: (id, data) => dispatch(completeTodo({ id, data })),
-  createTodoTask: data => dispatch(createTodo(data)),
-  updateTodoTask: (id, task) => dispatch(updateTodo({ id, task })),
+  updateTodoTask: (id, body) => dispatch(updatedTodoThunk({ id, body })),
+
+  getTodo: data => dispatch(getTodoThunk(data)),
+  createTodo: data => dispatch(createTodoThunk(data)),
+  deleteTodo: id => dispatch(deleteTodoThunk(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todo);

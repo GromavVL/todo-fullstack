@@ -12,7 +12,6 @@ module.exports.getAllTodo = async (req, res, next) => {
 
 module.exports.createTodo = async (req, res, next) => {
   const { body } = req;
-  console.log('body :>> ', body);
   try {
     const createdTodo = await Todo.create(body);
     res.status(201).send(createdTodo);
@@ -26,7 +25,6 @@ module.exports.updateTodoById = async (req, res, next) => {
     params: { id },
     body,
   } = req;
-  console.log('params :>> ', id);
   try {
     const [countUpdateTodo, updatedTodo] = await Todo.update(body, {
       where: { id },
