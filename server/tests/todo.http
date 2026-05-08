@@ -1,0 +1,17 @@
+POST http://localhost:5000/api/todo
+Content-Type: application/json
+
+{
+    "body": "Massages 2456"
+}
+
+GET http://localhost:5000/api/todo
+
+PATCH http://localhost:5000/api/todo/4
+Content-Type: application/json
+
+{
+    "body": "Massage 315"
+}
+
+DELETE http://localhost:5000/api/todo/3
